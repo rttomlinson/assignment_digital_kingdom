@@ -11,7 +11,7 @@ function kingdomGetter(req, res, next) {
     
     p.then(function onFulfilled(data) {
         //console.log(data);
-        req.kingdoms = data;
+        req.kingdoms = JSON.parse(data);
         next();
     })
     .catch(function onError(err) {

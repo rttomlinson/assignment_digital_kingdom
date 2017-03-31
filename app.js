@@ -3,6 +3,7 @@
 const express = require("express");
 const fs = require("fs");
 const handleBars = require("express-handlebars");
+const bodyParser = require("body-parser");
 
 //Require routers
 const realm = require('./routes/realm');
@@ -14,6 +15,7 @@ let app = express();
 app.engine('handlebars', handleBars({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use('/', realm);
 
 //Initialize port

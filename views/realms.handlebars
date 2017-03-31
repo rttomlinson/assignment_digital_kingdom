@@ -1,7 +1,12 @@
 <h1>Kingdoms</h1>
-{{kingdoms}}
 
 </br>
 {{#each kingdoms as |kingdom|}}
 	{{kingdom}}<br>	
 {{/each}}
+
+<form method="post">
+<label for="kingdom">Kindgom</label>
+<input type="text" id="kingdom" name="kingdom">
+<button type="submit">Submit</button>
+</form>
