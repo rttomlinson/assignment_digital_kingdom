@@ -22,14 +22,26 @@ function realmInfoScrubber(req, res, next) {
 	next();
 }
 
-
-
-
-
-function countCastles(obj) {
-	obj.numOfCastles = _propertyCounter(obj, "castles");
+function kingdomInfoScrubber(obj) {
+    obj.forEach((element) => {
+        countLieges(element, 'lieges');
+    })
 }
 
+function countCastles(obj) {
+    obj.numOfCastles = _propertyCounter(obj, "castles");
+}
+
+function countLieges(obj) {
+	obj.numOfLieges = _propertyCounter(obj, "lieges");
+    console.log(obj.numOfLieges);
+}
+
+function kingdomExists(kingdomName, kingdomsList) {
+    return kingdomsList.find(function(element) {
+        return element.name === kingdomName
+    })
+}
 
 function _propertyCounter(obj, prop) {
     return obj[prop].length;
@@ -67,5 +79,7 @@ function promiseWrap(resolve, reject) {
 module.exports = {
     kingdomGetter,
     writeToFile,
-    realmInfoScrubber
+    realmInfoScrubber,
+    kingdomExists,
+    kingdomInfoScrubber
 };

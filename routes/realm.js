@@ -1,7 +1,7 @@
 const express = require('express');
 const fs = require("fs");
 
-let { kingdomGetter, writeToFile, realmInfoScrubber } = require("../services/readKingdoms.js");
+let { kingdomGetter, writeToFile, realmInfoScrubber, kingdomExists } = require("../services/readKingdoms.js");
 
 var router = express.Router();
 
@@ -21,13 +21,10 @@ router.get("/", function(req, res) {
 router.post("/", function(req, res) {
 	
 	//If we find a match
-	if(req.kingdoms.find(function(element) {
-		return element.name === req.body.kingdom;
-	})) {
-		//Rerender the page
+
+	if (kingdomExists(req.body.kingdom, req.kingdoms)) {
 		console.log("That kingdom already exists!");
-		
-	} else {//If we don't a kingdom with the same name as the submitted data
+	} else {
 		console.log("Adding new kingdom!");
 			//make new object with post data
 		let newKingdom = {};
@@ -38,10 +35,8 @@ router.post("/", function(req, res) {
 		let stringKings = JSON.stringify(req.kingdoms, null, 2);
 			//overwrite json file
 		fs.writeFileSync('./data/realms.json', stringKings);
-		
-		
-
 	}
+
 	res.redirect("back");
 
 });

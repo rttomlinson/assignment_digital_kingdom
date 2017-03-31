@@ -1,7 +1,7 @@
 const express = require('express');
 const fs = require("fs");
 
-let { kingdomGetter, writeToFile } = require("../services/readKingdoms.js");
+let { kingdomGetter, writeToFile, kingdomInfoScrubber } = require("../services/readKingdoms.js");
 
 var router = express.Router();
 
@@ -17,8 +17,8 @@ router.get("/:kingdom", function(req, res) {
 	let jsonKingdom = req.kingdoms.find(function(element) {
 		return element.name === kingdom;
 	});
+	kingdomInfoScrubber(jsonKingdom.castles);
 	jsonKingdom.castles.forEach(function (element, index, arr) {
-		
 		
 		element.lieges = element.lieges.length;
 		
