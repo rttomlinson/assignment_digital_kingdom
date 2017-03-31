@@ -3,12 +3,19 @@
 const fs = require("fs");
 
 
-
-
-function kingdomGetter() {
-    return new Promise( (resolve, reject) => {
+function kingdomGetter(req, res, next) {
+    let p = new Promise( (resolve, reject) => {
 	    let cb = promiseWrap(resolve, reject);
 	    fs.readFile('./data/realms.json', 'utf8', cb);
+    });
+    
+    p.then(function onFulfilled(data) {
+        //console.log(data);
+        req.kingdoms = data;
+        next();
+    })
+    .catch(function onError(err) {
+        console.log(err);
     });
 }
 
@@ -20,9 +27,9 @@ function kingdomGetter() {
 function promiseWrap(resolve, reject) {
   return function errorFirstConverter(err, data) {
   if (err){
-  reject(err);
+    reject(err);
   }
-  resolve(data);
+    resolve(data);
   };
 }
 

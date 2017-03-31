@@ -6,30 +6,24 @@ let kingdomReader = require("../services/readKingdoms.js");
 var router = express.Router();
 
 
+router.use(kingdomReader);
 
-router.use(function(req, res, next) {
-	let kingdoms = kingdomReader();
-	req.kingdoms = [];
-	
-});
-
-
-let kingdoms = kingdomGetter();
-let allKingdoms = [];
-
-kingdoms.then(function onfullfilled(data) {
-	let json = JSON.parse(data);
-	json.forEach( (el) => {
-		allKingdoms.push(el.name);
-	})
-
-})
 
 
 router.get("/", function(req, res) {
-	console.log("Got it");
+	//console.log("Got it");
+	//console.log("Here in get handler req.kingdoms", req.kingdoms);
+	let allKingdoms = [];
+	let json = JSON.parse(req.kingdoms);
+	json.forEach( (el) => {
+ 		allKingdoms.push(el.name);
+	});
+	
+	
+	
 	res.render("realms.handlebars", { "kingdoms": allKingdoms });
 });
 
 
 module.exports = router;
+

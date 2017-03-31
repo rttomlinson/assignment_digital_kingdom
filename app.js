@@ -19,26 +19,6 @@ app.use('/', realm);
 //Initialize port
 let port = process.env.PORT || 3000;
 
-function promiseWrap(resolve, reject) {
-  return function errorFirstConverter(err, data) {
-  if (err){
-  reject(err);
-  }
-  resolve(data);
-  };
-}
-
-let p = new Promise( (resolve, reject) => {
-	let cb = promiseWrap(resolve, reject);
-	fs.readFile('./data/realms.json', 'utf8', cb);
-});
-
-
-
-
-
-
-
 app.listen(port, function() {
     console.log("Server started!");
 });
