@@ -3,6 +3,8 @@
 const express = require("express");
 const fs = require("fs");
 const handleBars = require("express-handlebars");
+
+//Require routers
 const realm = require('./routes/realm');
 
 //Create app instance
