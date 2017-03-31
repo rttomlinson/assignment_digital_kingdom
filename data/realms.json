@@ -1,6 +1,6 @@
 [
   {
-    "name": "Kingdom Black",
+    "name": "Black",
     "king": "me",
     "queen": "beyonce",
     "castles": [
@@ -38,7 +38,7 @@
     ]
   },
   {
-    "name": "Kingdom Blacker",
+    "name": "Blacker",
     "king": "me",
     "queen": "beyonce",
     "castles": [
@@ -74,5 +74,8 @@
         "lieges": []
       }
     ]
+  },
+  {
+    "name": "Trash Can"
   }
 ]

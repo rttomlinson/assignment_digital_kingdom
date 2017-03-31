@@ -23,15 +23,31 @@ router.get("/", function(req, res) {
 
 router.post("/", function(req, res) {
 	
+	//If we find a match
+	if(req.kingdoms.find(function(element) {
+		return element.name === req.body.kingdom;
+	})) {
+		//Rerender the page
+		console.log("That kingdom already exists!");
+		
+	} else {//If we don't a kingdom with the same name as the submitted data
+		console.log("Adding new kingdom!");
+			//make new object with post data
+		let newKingdom = {};
+		newKingdom.name = req.body.kingdom;
+			//push new kingdom to req.kingdoms
+		req.kingdoms.push(newKingdom);
+			//change req.kingdoms back to string
+		let stringKings = JSON.stringify(req.kingdoms, null, 2);
+			//overwrite json file
+		fs.writeFileSync('./data/realms.json', stringKings);
+		
+		
 
-	if(!req.kingdoms.find(function(element) {
-		return element.name === req.body.kingdom
-	}))
-	//make new object with post data
-	//push new kingdom to req.kingdom
-	//change req.kingdoms back to string
-	//overwrite json file
-})
+	}
+	res.redirect("back");
+
+});
 
 
 module.exports = router;
