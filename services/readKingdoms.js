@@ -13,7 +13,7 @@ function kingdomGetter() {
 }
 
 
-module.exports = kingdomGetter;
+
 
 
 
@@ -25,3 +25,6 @@ function promiseWrap(resolve, reject) {
   resolve(data);
   };
 }
+
+
+module.exports = kingdomGetter;
