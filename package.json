@@ -4,6 +4,8 @@
   "description": "Build the digital kingdom of your wildest dreams! Populate it with fawning vassals!",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon app.js",
+    "start-node": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

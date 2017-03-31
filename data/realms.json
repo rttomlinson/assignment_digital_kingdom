@@ -43,7 +43,7 @@
     "queen": "beyonce",
     "castles": [
       {
-        "name": "Castle Black",
+        "name": "Castle Blue",
         "lieges": [
           {
             "name": "i do not know what lieges mean",
@@ -76,6 +76,7 @@
     ]
   },
   {
-    "name": "Trash Can"
+    "name": "Trash Can",
+    "castles": []
   }
 ]

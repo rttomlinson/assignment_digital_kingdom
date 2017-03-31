@@ -1,12 +1,12 @@
 const express = require('express');
 const fs = require("fs");
 
-let kingdomReader = require("../services/readKingdoms.js");
+let { kingdomGetter, writeToFile } = require("../services/readKingdoms.js");
 
 var router = express.Router();
 
 
-router.use(kingdomReader);
+router.use(kingdomGetter);
 
 
 
@@ -14,10 +14,15 @@ router.get("/:kingdom", function(req, res) {
 	console.log("trying to get the page");
 	let kingdom = req.params.kingdom;
 	//locate kingdom in req.kingdoms
-	jsonKingdom = req.kingdoms.find(function(element) {
+	let jsonKingdom = req.kingdoms.find(function(element) {
 		return element.name === kingdom;
 	});
-
+	jsonKingdom.castles.forEach(function (element, index, arr) {
+		
+		
+		element.lieges = element.lieges.length;
+		
+	});
 	if(jsonKingdom){
 		console.log(jsonKingdom);	
 	} else {//If we don't a kingdom with the same name as the submitted data

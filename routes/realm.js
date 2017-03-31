@@ -1,24 +1,40 @@
 const express = require('express');
 const fs = require("fs");
 
-let kingdomReader = require("../services/readKingdoms.js");
+let { kingdomGetter, writeToFile, propertyCounter } = require("../services/readKingdoms.js");
 
 var router = express.Router();
 
 
-router.use(kingdomReader);
+router.use(kingdomGetter);
 
 
 
 router.get("/", function(req, res) {
 	//console.log("Got it");
 	//console.log("Here in get handler req.kingdoms", req.kingdoms);
-	let allKingdoms = [];
-	req.kingdoms.forEach( (el) => {
- 		allKingdoms.push(el.name);
+	
+	req.kingdoms.forEach(function (element, index, arr) {
+		propertyCounter(element, 'castles');
 	});
 	
-	res.render("realms.handlebars", { "kingdoms": allKingdoms });
+	
+	/*req.kingdoms.forEach( function(element, index, arr) {
+		conuter('castles', element);
+	
+		countCastles(element);
+	}
+	function countCastles(someObject) {
+		element.numOfCastles = element.castles.length;
+	}
+	counter('castles', <a kingdom>);
+	
+	function counter(nameOfProperty, element) {
+		element["numOf" + nameOfProperty] = element['nameOfProperty'].length
+	}
+	*/
+	
+	res.render("realms.handlebars", { "kingdoms": req.kingdoms });
 });
 
 router.post("/", function(req, res) {

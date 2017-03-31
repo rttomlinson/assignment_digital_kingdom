@@ -1,12 +1,13 @@
 <h1>Kingdom {{kingdom.name}}</h1>
 
 </br>
-{{#each kingdoms as |kingdom|}}
-	<a href="/kingdoms/{{kingdom}}">Kingdom: {{kingdom}}</a><br>	
+{{#each kingdom.castles as |castle|}}
+	<a href="/castle/{{castle.name}}">Castle: {{castle.name}}</a><br>
+	<div>Number of Leeches: {{castle.lieges}}</div><br>
 {{/each}}
 
 <form method="post">
-<label for="kingdom">Kindgom</label>
-<input type="text" id="kingdom" name="kingdom">
-<button type="submit">Submit</button>
+    <label for="castle">Castle</label>
+    <input type="text" id="castle" name="castle">
+    <button type="submit">Submit</button>
 </form>
