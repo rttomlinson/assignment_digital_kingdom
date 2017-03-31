@@ -1,0 +1,40 @@
+[
+  {
+    "name": "Kindom Black",
+    "king": "me",
+    "queen": "beyonce",
+    "castles": [
+      {
+        "name": "Castle Black",
+        "lieges": [
+          {
+            "name": "i do not know what lieges mean",
+            "vassals": [
+              {
+                "name": "Karl"
+              },
+              {
+                "name": "vassalB"
+              }
+            ]
+          },
+          {
+            "name": "i still don't know",
+            "vassals": [
+              {
+                "name": "vassalA"
+              },
+              {
+                "name": "vassalB"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Castle Black Revamped",
+        "lieges": []
+      }
+    ]
+  }
+]
