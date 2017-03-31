@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 
 //Require routers
 const realm = require('./routes/realm');
+const kingdoms = require('./routes/kingdom');
 
 //Create app instance
 let app = express();
@@ -17,6 +18,7 @@ app.set('view engine', 'handlebars');
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use('/', realm);
+app.use('/kingdoms/', kingdoms);
 
 //Initialize port
 let port = process.env.PORT || 3000;
