@@ -5,10 +5,7 @@ let { kingdomGetter, writeToFile, kingdomInfoScrubber } = require("../services/r
 
 var router = express.Router();
 
-
 router.use(kingdomGetter);
-
-
 
 router.get("/:kingdom", function(req, res) {
 	console.log("trying to get the page");
@@ -17,28 +14,16 @@ router.get("/:kingdom", function(req, res) {
 	let jsonKingdom = req.kingdoms.find(function(element) {
 		return element.name === kingdom;
 	});
-	kingdomInfoScrubber(jsonKingdom.castles);
-	jsonKingdom.castles.forEach(function (element, index, arr) {
-		
-		element.lieges = element.lieges.length;
-		
-	});
 	if(jsonKingdom){
-		console.log(jsonKingdom);	
+		console.log(jsonKingdom);
+		kingdomInfoScrubber(jsonKingdom.castles);
 	} else {//If we don't a kingdom with the same name as the submitted data
 		console.log("Kingdom doesn't exist!");
-
-
 	}
 	//grab king, queen, # of castles, name
 
 
 	//display info on kingdoms.hb
-
-	// let allLieges = [];
-	// req.kingdoms.forEach( (el) => {
- // 		allKingdoms.push(el.name);
-	// });
 	
 	res.render("kingdoms.handlebars", { "kingdom": jsonKingdom });
 });

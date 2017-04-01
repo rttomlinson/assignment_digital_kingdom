@@ -6,20 +6,26 @@ const fs = require("fs");
 function kingdomGetter(req, res, next) {
     let p = _readFile();
     p.then(function onFulfilled(data) {
-        //console.log(data);
         req.kingdoms = JSON.parse(data);
+		next();
+    }, function onRejected(err) {
+        console.log("An error occured when calling _readFile()", err);
+        //Maybe just dummy req.kingdoms value?
         next();
     })
     .catch(function onError(err) {
-        console.log(err);
+        console.log("An error occurred when processing kingdomGetter", err);
     });
+
 }
 
-function realmInfoScrubber(req, res, next) {
-    req.kingdoms.forEach(function (element, index, arr) {
-		countCastles(element, 'castles');
-	});
-	next();
+function realmInfoScrubber(obj) {
+    return new Promise(function (resolve, reject) {
+        obj.forEach(function (element, index, arr) {
+		    countCastles(element, 'castles');
+	    });
+	    resolve();
+    });
 }
 
 function kingdomInfoScrubber(obj) {

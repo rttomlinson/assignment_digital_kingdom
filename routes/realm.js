@@ -5,17 +5,19 @@ let { kingdomGetter, writeToFile, realmInfoScrubber, kingdomExists } = require("
 
 var router = express.Router();
 
-
 router.use(kingdomGetter);
 
-router.use(realmInfoScrubber);
 
 router.get("/", function(req, res) {
-	//console.log("Got it");
-	//console.log("Here in get handler req.kingdoms", req.kingdoms);
-	
-	//realmsInfoScrubber(req.kingdoms)
-	res.render("realms.handlebars", { "kingdoms": req.kingdoms });
+
+	let p = realmInfoScrubber(req.kingdoms);
+    p.then(function onFulfilled(data) {
+    	res.render("realms.handlebars", { "kingdoms": req.kingdoms });
+    })
+    .catch(function onError(err) {
+        console.log(err);
+    });
+
 });
 
 router.post("/", function(req, res) {
@@ -30,6 +32,8 @@ router.post("/", function(req, res) {
 		let newKingdom = {};
 		newKingdom.name = req.body.kingdom;
 			//push new kingdom to req.kingdoms
+			//Add castles array to newKingdom
+		newKingdom.castles = [];
 		req.kingdoms.push(newKingdom);
 			//change req.kingdoms back to string
 		let stringKings = JSON.stringify(req.kingdoms, null, 2);

@@ -35,7 +35,8 @@
         "name": "Castle Black Revamped",
         "lieges": []
       }
-    ]
+    ],
+    "numOfCastles": 2
   },
   {
     "name": "Blacker",
@@ -73,10 +74,16 @@
         "name": "Castle Black Revamped",
         "lieges": []
       }
-    ]
+    ],
+    "numOfCastles": 2
   },
   {
     "name": "Trash Can",
+    "castles": [],
+    "numOfCastles": 0
+  },
+  {
+    "name": "Trash Can Land",
     "castles": []
   }
 ]
