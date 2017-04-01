@@ -40,14 +40,23 @@ function countCastles(obj) {
 
 function countLieges(obj) {
 	obj.numOfLieges = _propertyCounter(obj, "lieges");
-    console.log(obj.numOfLieges);
 }
 
 function kingdomExists(kingdomName, kingdomsList) {
     return kingdomsList.find(function(element) {
-        return element.name === kingdomName
-    })
+        return element.name === kingdomName;
+    });
 }
+
+function makeNewKingdom(kingdomData) {
+    let kingdom = {};
+    //Add name of new kingdom from kingdomData
+    kingdom.name = kingdomData.kingdom
+    //Extract Castles from kingdomData if available
+    kingdom.castles = [];
+    return kingdom;
+}
+
 
 function _propertyCounter(obj, prop) {
     return obj[prop].length;
@@ -87,5 +96,6 @@ module.exports = {
     writeToFile,
     realmInfoScrubber,
     kingdomExists,
-    kingdomInfoScrubber
+    kingdomInfoScrubber,
+    makeNewKingdom
 };

@@ -1,7 +1,7 @@
 const express = require('express');
 const fs = require("fs");
 
-let { kingdomGetter, writeToFile, realmInfoScrubber, kingdomExists } = require("../services/readKingdoms.js");
+let { kingdomGetter, writeToFile, realmInfoScrubber, kingdomExists, makeNewKingdom } = require("../services/readKingdoms.js");
 
 var router = express.Router();
 
@@ -28,17 +28,16 @@ router.post("/", function(req, res) {
 		console.log("That kingdom already exists!");
 	} else {
 		console.log("Adding new kingdom!");
+		//Make new kingdom template
+		
 			//make new object with post data
-		let newKingdom = {};
-		newKingdom.name = req.body.kingdom;
+		let newKingdom = makeNewKingdom(req.body);
 			//push new kingdom to req.kingdoms
-			//Add castles array to newKingdom
-		newKingdom.castles = [];
 		req.kingdoms.push(newKingdom);
 			//change req.kingdoms back to string
 		let stringKings = JSON.stringify(req.kingdoms, null, 2);
 			//overwrite json file
-		fs.writeFileSync('./data/realms.json', stringKings);
+		writeToFile(stringKings);
 	}
 
 	res.redirect("back");
